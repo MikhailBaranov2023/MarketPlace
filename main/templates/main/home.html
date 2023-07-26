@@ -1,4 +1,5 @@
 {% extends 'main/base.html' %}
+{% load my_tags %}
 {% block content %}
 {% include 'main/includes/inc_product.html' %}
 <div class="container">
@@ -7,7 +8,7 @@
         <div class="col-3">
             <div class="card mb-4 box-shadow">
                 <img class="card-img-top"
-                     src="/media/{{ object.image }}"
+                     src="{{ object.image| mymedia }}"
                      alt="Card image cap">
                 <div class="card-header">
                     <h4 class="my-0 font-weight-normal">{{object | title}}</h4>
