@@ -1,0 +1,22 @@
+{% extends 'main/base.html' %}
+{% block content %}
+{% include 'main/includes/inc_product.html' %}
+<div class="row">
+    {% for object in object_list %}
+    <div class="col-md-4">
+        <div class="card mb-2 box-shadow">
+            <img class="card-img-top"
+                 src="/media/{{ object.image }}"
+                 alt="Card image cap">
+            <div class="card-body">
+                <li> {{object.category}}</li>
+                <li>{{object.description}}</li>
+                <li>{{object.price}} рублей</li>
+            </div>
+            <a class="p-2 btn btn-outline-primary" href="#">Купить</a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
+
