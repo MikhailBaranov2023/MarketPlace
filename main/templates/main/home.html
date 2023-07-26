@@ -15,7 +15,7 @@
                 </div>
                 <div class="card-body">
                     <li> {{object.category}}</li>
-                    <li>{{object.description}}</li>
+                    <li>{{object.description|truncatechars:100 }}</li>
                 </div>
                 <a class="p-2 btn btn-outline-primary" href="{% url 'main:product' object.pk %}">Перейти к товару</a>
             </div>

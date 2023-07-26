@@ -11,10 +11,16 @@
                  alt="Card image cap">
             <div class="card-body">
                 <li> {{object.category}}</li>
-                <li>{{object.description}}</li>
                 <li>{{object.price}} рублей</li>
             </div>
             <a class="p-2 btn btn-outline-primary" href="#">Купить</a>
+        </div>
+    </div>
+        <div class="col-md-4">
+        <div class="card mb-2 box-shadow">
+            <div class="card-body">
+                <li>{{object.description}}</li>
+            </div>
         </div>
     </div>
     {% endfor %}
