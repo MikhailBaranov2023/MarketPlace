@@ -1,25 +1,33 @@
 from django.shortcuts import render
 from main.models import Product, Category
-from django.core.paginator import Paginator
+from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
+from django.urls import reverse_lazy, reverse
 
 
-def home(requests):
-    product_list = Product.objects.all()
-    context = {
-        'object_list': product_list,
-        'title': 'Товары'
-    }
-    return render(requests, 'main/home.html', context)
+class ProductListView(ListView):
+    model = Product
 
 
-# Create your views here.
-def product(requests, pk):
-    product_list = Product.objects.filter(id=pk)
-    context = {
-        'object_list': product_list,
-        'title': 'Продукты'
-    }
-    return render(requests, 'main/product.html', context)
+class ProductDetailView(DetailView):
+    model = Product
+    template_name = 'main/product_detail.html'
+
+
+class ProductCreateView(CreateView):
+    model = Product
+    fields = ('name', 'description', 'image', 'category', 'price',)
+    success_url = reverse_lazy('main:home')
+
+
+class ProductUpdateView(UpdateView):
+    model = Product
+    fields = ('name', 'description', 'image', 'category', 'price',)
+    success_url = reverse_lazy('main:home')
+
+
+class ProductDeleteView(DeleteView):
+    model = Product
+    success_url = reverse_lazy('main:home')
 
 
 def contacts(requests):
