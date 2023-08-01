@@ -38,6 +38,7 @@ class BlogUpdateView(UpdateView):
             new_mat = form.save()
             new_mat.slug = slugify(new_mat.header)
             new_mat.save()
+            self.kwargs['slug'] = new_mat.slug
 
         return super().form_valid(form)
 
