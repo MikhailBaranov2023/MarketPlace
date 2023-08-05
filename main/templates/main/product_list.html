@@ -2,34 +2,31 @@
 {% load my_tags %}
 {% block content %}
 {% include 'main/includes/inc_product.html' %}
-    <div class="container">
-        <div class="col-12 mb-5">
-            <a class='btn btn-outline-primary' href="{% url 'main:create' %}">Добавить товар</a>
-        </div>
-        <div class="row text-center">
-            {% for object in object_list %}
-            <div class="col-3">
-                <div class="card mb-4 box-shadow">
-                    <img class="card-img-top"
-                         src="{{ object.image| mymedia }}"
-                         alt="Card image cap">
-                    <div class="card-header">
-                        <h4 class="my-0 font-weight-normal">{{object | title}}</h4>
-                    </div>
-                    <div class="card-body">
-                        <div class="btn-group">
-                            <a href="{% url 'main:edit' object.pk %}"
-                               class="btn btn-sm btn-outline-secondary">Edit</a>
-                            <a href="{% url 'main:delete' object.pk %}"
-                               class="btn btn-sm btn-outline-danger">Delete</a>
-                        </div>
-                        <li> {{object.category}}</li>
-                        <li>{{object.description|truncatechars:100 }}</li>
-                    </div>
-                    <a class="p-2 btn btn-outline-primary" href="{% url 'main:product' object.pk %}">Перейти к товару</a>
+<div class="container">
+    <div class="col-12 mb-5">
+        <a class='btn btn-outline-primary' href="{% url 'main:create' %}">Добавить товар</a>
+    </div>
+    <div class="row text-center">
+        {% for object in object_list %}
+        <div class="col-3">
+            <div class="card mb-4 box-shadow">
+                <img class="card-img-top"
+                     src="{{ object.image| mymedia }}"
+                     alt="Card image cap">
+                <div class="card-header">
+                    <h4 class="my-0 font-weight-normal">{{object | title}}</h4>
+                </div>
+                <div class="card-body">
+                    <li> {{object.category}}</li>
+                    <li>{{object.description|truncatechars:100 }}</li>
+                </div>
+                <div class="card-footer">
+                    <a class="p-2 btn btn-outline-primary" href="{% url 'main:product' object.pk %}">Перейти к
+                        товару</a>
                 </div>
             </div>
-            {% endfor %}
         </div>
+        {% endfor %}
     </div>
+</div>
 {% endblock %}

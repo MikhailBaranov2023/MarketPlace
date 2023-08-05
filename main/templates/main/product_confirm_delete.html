@@ -1,6 +1,6 @@
 {% extends 'main/base.html' %}
-
 {% block content %}
+{% include 'main/includes/inc_product.html' %}
     <div class="col-12">
         <div class="row">
             <div class="col-6">
@@ -8,7 +8,7 @@
                     <div class="card-body">
                         <form method="post">
                             {% csrf_token %}
-                            <p>Хотите удалить товар "{{ object.title }}" ?</p>
+                            <h3>Хотите удалить товар "{{ object.name }}" ?</h3>
                             <button type="submit" class="btn btn-danger">Подтвердить</button>
                             <a href="{% url 'main:home' %}" class= "btn btn-warning"> Отмена</a>
                         </form>

@@ -2,24 +2,41 @@
 {% load my_tags %}
 {% block content %}
 {% include 'main/includes/inc_product.html' %}
-<div class="row">
-    <div class="col-md-4">
-        <div class="card mb-2 box-shadow">
-            <img class="card-img-top"
-                 src="{{ object.image| mymedia }}"
-                 alt="Card image cap">
-            <div class="card-body">
-                <h4 class="my-0 font-weight-normal">{{object | title}}</h4>
-                <li> {{object.category}}</li>
-                <li>{{object.price}} рублей</li>
-            </div>
-            <a class="p-2 btn btn-outline-primary" href="#">Купить</a>
+<div class="container">
+    <div class="col-12 mb-5">
+        <div class="btn-group">
+            <a class='btn btn-outline-primary' href="{% url 'main:edit' object.pk %}">Изменить</a>
+            <a class='btn btn-outline-danger' href="{% url 'main:delete' object.pk %}">Удалить</a>
         </div>
     </div>
-    <div class="col-md-4">
-        <div class="card mb-2 box-shadow">
-            <div class="card-body">
-                <li>{{object.description}}</li>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card mb-2 box-shadow">
+                <img class="card-img-top"
+                     src="{{ object.image| mymedia }}"
+                     alt="Card image cap">
+                <div class="card-body">
+                    <h4 class="my-0 font-weight-normal">{{object | title}}</h4>
+                    <li> {{object.category}}</li>
+                    <li>{{object.price}} рублей</li>
+                </div>
+                <div class="card-footer">
+                    <a class="p-2 btn btn-outline-primary" href="#">Купить</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card mb-2 box-shadow">
+                <div class="card-body">
+
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card mb-2 box-shadow">
+                <div class="card-body">
+                    <li>{{object.description}}</li>
+                </div>
             </div>
         </div>
     </div>
