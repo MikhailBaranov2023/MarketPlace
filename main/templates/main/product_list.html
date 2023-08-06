@@ -8,7 +8,7 @@
     </div>
     <div class="row text-center">
         {% for object in object_list %}
-        <div class="col-3">
+        <div class="col-6">
             <div class="card mb-4 box-shadow">
                 <img class="card-img-top"
                      src="{{ object.image| mymedia }}"
@@ -17,6 +17,14 @@
                     <h4 class="my-0 font-weight-normal">{{object | title}}</h4>
                 </div>
                 <div class="card-body">
+                    <li>
+                        Актуальная версия -
+                        {% for version_item in object.version_set.all %}
+                            {% if version_item.is_active %}
+                                {{ version_item.version_name }}
+                            {% endif %}
+                        {% endfor %}
+                    </li>
                     <li> {{object.category}}</li>
                     <li>{{object.description|truncatechars:100 }}</li>
                 </div>

@@ -27,8 +27,15 @@
         </div>
         <div class="col-md-4">
             <div class="card mb-2 box-shadow">
+                <div class="card-header">
+                    <h3>Версия</h3>
+                </div>
                 <div class="card-body">
-
+                    {% for version_item in object.version_set.all %}
+                        {% if version_item.is_active %}
+                            {{ version_item.version_name }}
+                        {% endif %}
+                    {% endfor %}
                 </div>
             </div>
         </div>
