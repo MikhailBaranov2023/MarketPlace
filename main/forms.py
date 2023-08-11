@@ -11,10 +11,10 @@ class FormStileMixin:
             field.widget.attrs['class'] = 'form-control'
 
 
-class ProductForm(FormStileMixin,forms.ModelForm):
+class ProductForm(FormStileMixin, forms.ModelForm):
     class Meta:
         model = Product
-        exclude = ('make_date', 'change_date',)
+        exclude = ('make_date', 'change_date', 'owner',)
 
     def clean_name(self):
         cleaned_data = self.cleaned_data['name']
@@ -39,7 +39,7 @@ class ProductForm(FormStileMixin,forms.ModelForm):
         return cleaned_data
 
 
-class VersionForm(FormStileMixin,forms.ModelForm):
+class VersionForm(FormStileMixin, forms.ModelForm):
     class Meta:
         model = Version
         fields = '__all__'

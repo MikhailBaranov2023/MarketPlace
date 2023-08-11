@@ -1,40 +1,45 @@
 {% extends 'main/base.html' %}
 {% load my_tags %}
 {% block content %}
-{% include 'main/includes/inc_product.html' %}
-<div class="container">
-    <div class="col-12 mb-5">
-        <a class='btn btn-outline-primary' href="{% url 'main:create' %}">Добавить товар</a>
-    </div>
-    <div class="row text-center">
-        {% for object in object_list %}
-        <div class="col-6">
-            <div class="card mb-4 box-shadow">
-                <img class="card-img-top"
-                     src="{{ object.image| mymedia }}"
-                     alt="Card image cap">
-                <div class="card-header">
-                    <h4 class="my-0 font-weight-normal">{{object | title}}</h4>
-                </div>
-                <div class="card-body">
-                    <li>
-                        Актуальная версия -
-                        {% for version_item in object.version_set.all %}
-                            {% if version_item.is_active %}
-                                {{ version_item.version_name }}
-                            {% endif %}
-                        {% endfor %}
-                    </li>
-                    <li> {{object.category}}</li>
-                    <li>{{object.description|truncatechars:100 }}</li>
-                </div>
-                <div class="card-footer">
-                    <a class="p-2 btn btn-outline-primary" href="{% url 'main:product' object.pk %}">Перейти к
-                        товару</a>
-                </div>
-            </div>
+    {% include 'main/includes/inc_product.html' %}
+    <div class="container">
+        <div class="col-12 mb-5">
+            {% if user.is_authenticated %}
+                <a class='btn btn-outline-primary' href="{% url 'main:create' %}">Добавить товар</a>
+            {% endif %}
         </div>
-        {% endfor %}
+        <div class="row text-center">
+            {% for object in object_list %}
+                <div class="col-6">
+                    <div class="card mb-4 box-shadow">
+                        <img class="card-img-top"
+                             src="{{ object.image| mymedia }}"
+                             alt="Card image cap">
+                        <div class="card-header">
+                            <h4 class="my-0 font-weight-normal">{{ object | title }}</h4>
+                        </div>
+                        <div class="card-body">
+                            <li>
+                                Актуальная версия -
+                                {% for version_item in object.version_set.all %}
+                                    {% if version_item.is_active %}
+                                        {{ version_item.version_name }}
+                                    {% endif %}
+                                {% endfor %}
+                            </li>
+                            <li> {{ object.category }}</li>
+                            <li>{{ object.description|truncatechars:100 }}</li>
+                        </div>
+                        <div class="card-footer">
+                            <h6 class="text-muted">Владелец : {{ object.owner.first_name }} {{ object.owner.last_name }}</h6>
+                        </div>
+                        <div class="card-footer">
+                            <a class="p-2 btn btn-outline-primary" href="{% url 'main:product' object.pk %}">Перейти к
+                                товару</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
     </div>
-</div>
 {% endblock %}
