@@ -34,7 +34,6 @@ class ProductUpdateView(UpdateView):
     form_class = ProductForm
     success_url = reverse_lazy('main:home')
 
-
     def get_context_data(self, **kwargs):
         context_data = super().get_context_data(**kwargs)
         VersionFormset = inlineformset_factory(Product, Version, form=VersionForm, extra=1)

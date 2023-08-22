@@ -7,6 +7,7 @@ from django.core.mail import send_mail
 import random
 from django.conf import settings
 from django.contrib.auth import get_user_model
+from users.services import verification
 
 
 class RegisterView(CreateView):
@@ -18,10 +19,7 @@ class RegisterView(CreateView):
     def form_valid(self, form):
         user = form.save()
         user.is_active = False
-        send_mail(subject='Активация',
-                  message=f'Для активации профиля пройдите по ссылке - http://127.0.0.1:8000/users/activate/{user.id}/',
-                  from_email=settings.EMAIL_HOST_USER,
-                  recipient_list=[user.email])
+        verification(user)
         return super().form_valid(form)
 
 
